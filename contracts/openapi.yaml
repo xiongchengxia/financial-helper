@@ -1,0 +1,138 @@
+openapi: 3.1.0
+info:
+  title: Financial Helper API
+  version: 1.0.0
+  description: 财税票据自动处理 API
+servers:
+  - url: http://localhost:8001
+paths:
+  /health:
+    get:
+      summary: 健康检查
+      responses:
+        "200":
+          description: OK
+  /v1/tasks:
+    post:
+      summary: 上传图片或 PDF 发票并创建识别任务
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "201":
+          description: 任务已创建
+    get:
+      summary: 任务列表
+      responses:
+        "200":
+          description: OK
+  /v1/tasks/{id}:
+    get:
+      summary: 查询任务状态
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+  /v1/documents:
+    get:
+      summary: 文档列表
+      responses:
+        "200":
+          description: OK
+  /v1/documents/{id}:
+    delete:
+      summary: 删除文档及关联凭证
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: 已删除
+    get:
+      summary: 文档详情
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+  /v1/documents/{id}/vouchers:
+    post:
+      summary: 为文档生成会计凭证
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          description: 凭证已生成
+  /v1/vouchers:
+    get:
+      summary: 凭证列表
+      responses:
+        "200":
+          description: OK
+  /v1/vouchers/{id}:
+    get:
+      summary: 凭证详情
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+  /v1/export/vouchers:
+    get:
+      summary: 导出全量凭证
+      parameters:
+        - name: format
+          in: query
+          schema:
+            type: string
+            enum: [json, xlsx]
+        - name: from
+          in: query
+          schema:
+            type: string
+        - name: to
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 导出文件
+  /v1/media/{id}/file:
+    get:
+      summary: 获取原图
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 图片二进制

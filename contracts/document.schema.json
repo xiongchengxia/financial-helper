@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-helper.local/schemas/document.schema.json",
+  "title": "Document",
+  "type": "object",
+  "required": ["id", "kind", "mediaId", "taskId", "payload", "confidence", "createdAt", "updatedAt"],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "kind": { "type": "string", "enum": ["invoice", "bank", "other"] },
+    "mediaId": { "type": "string", "format": "uuid" },
+    "taskId": { "type": "string", "format": "uuid" },
+    "payload": { "type": "object" },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "compliance": { "$ref": "compliance-result.schema.json" },
+    "risks": {
+      "type": "array",
+      "items": { "$ref": "risk-flag.schema.json" }
+    },
+    "rawOcrPath": { "type": ["string", "null"] },
+    "providerJobId": { "type": ["string", "null"] },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-helper.local/schemas/bank-transaction.schema.json",
+  "title": "BankTransactionPayload",
+  "description": "二期：银行流水/回单结构化字段占位",
+  "type": "object",
+  "properties": {
+    "bank_name": { "type": "string" },
+    "transaction_time": { "type": "string" },
+    "counterparty_name": { "type": ["string", "null"] },
+    "counterparty_account": { "type": ["string", "null"] },
+    "debit_amount": { "type": ["number", "null"] },
+    "credit_amount": { "type": ["number", "null"] },
+    "payment_amount": { "type": ["number", "null"] },
+    "balance": { "type": ["number", "null"] },
+    "summary": { "type": ["string", "null"] },
+    "serial_no": { "type": ["string", "null"] },
+    "currency": { "type": "string", "default": "CNY" }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-helper.local/schemas/compliance-result.schema.json",
+  "title": "ComplianceResult",
+  "type": "object",
+  "required": ["passed", "hits", "evaluatedAt"],
+  "properties": {
+    "passed": { "type": "boolean" },
+    "hits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["ruleId", "passed", "message"],
+        "properties": {
+          "ruleId": { "type": "string" },
+          "passed": { "type": "boolean" },
+          "message": { "type": "string" },
+          "evidence": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "evaluatedAt": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

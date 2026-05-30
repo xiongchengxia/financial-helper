@@ -216,3 +216,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project local data & runtimes
+/data/
+apps/api/.venv/
+apps/api/.env
+apps/web/.env.local
+apps/web/node_modules/
+apps/web/.next/

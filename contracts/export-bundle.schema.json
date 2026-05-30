@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-helper.local/schemas/export-bundle.schema.json",
+  "title": "ExportBundle",
+  "type": "object",
+  "required": ["exportVersion", "exportedAt", "vouchers"],
+  "properties": {
+    "exportVersion": { "type": "string" },
+    "exportedAt": { "type": "string", "format": "date-time" },
+    "vouchers": {
+      "type": "array",
+      "items": { "$ref": "voucher.schema.json" }
+    },
+    "documents": {
+      "type": "array",
+      "items": { "$ref": "document.schema.json" }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-helper.local/schemas/voucher.schema.json",
+  "title": "Voucher",
+  "type": "object",
+  "required": ["id", "voucherDate", "voucherWord", "voucherNo", "eventType", "documentIds", "lines", "debitTotal", "creditTotal", "createdAt"],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "voucherDate": { "type": "string" },
+    "voucherWord": { "type": "string" },
+    "voucherNo": { "type": "string" },
+    "attachmentCount": { "type": "integer", "minimum": 0 },
+    "eventType": {
+      "type": "string",
+      "enum": ["PURCHASE_WITH_VAT", "BANK_PAYMENT", "BANK_RECEIPT"]
+    },
+    "documentIds": {
+      "type": "array",
+      "items": { "type": "string", "format": "uuid" }
+    },
+    "lines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["lineNo", "accountCode", "accountName", "side"],
+        "properties": {
+          "lineNo": { "type": "integer" },
+          "accountCode": { "type": "string" },
+          "accountName": { "type": "string" },
+          "side": { "type": "string", "enum": ["debit", "credit"] },
+          "debit": { "type": "number" },
+          "credit": { "type": "number" },
+          "summary": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "debitTotal": { "type": "number" },
+    "creditTotal": { "type": "number" },
+    "createdAt": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

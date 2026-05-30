@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-helper.local/schemas/invoice.schema.json",
+  "title": "InvoicePayload",
+  "type": "object",
+  "required": [
+    "invoice_code",
+    "invoice_number",
+    "issue_date",
+    "buyer_name",
+    "buyer_tax_id",
+    "seller_name",
+    "seller_tax_id",
+    "amount_without_tax",
+    "tax_amount",
+    "total_with_tax",
+    "invoice_type"
+  ],
+  "properties": {
+    "invoice_code": { "type": "string" },
+    "invoice_number": { "type": "string" },
+    "issue_date": { "type": "string", "description": "YYYY-MM-DD" },
+    "buyer_name": { "type": "string" },
+    "buyer_tax_id": { "type": "string" },
+    "seller_name": { "type": "string" },
+    "seller_tax_id": { "type": "string" },
+    "amount_without_tax": { "type": "number" },
+    "tax_amount": { "type": "number" },
+    "total_with_tax": { "type": "number" },
+    "tax_rate": { "type": ["number", "null"] },
+    "invoice_type": {
+      "type": "string",
+      "enum": ["vat_special", "vat_normal", "vat_electronic"]
+    },
+    "check_code": { "type": ["string", "null"] },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string" },
+          "spec": { "type": ["string", "null"] },
+          "unit": { "type": ["string", "null"] },
+          "quantity": { "type": ["number", "null"] },
+          "unit_price": { "type": ["number", "null"] },
+          "amount": { "type": ["number", "null"] },
+          "tax_rate": { "type": ["number", "null"] },
+          "tax_amount": { "type": ["number", "null"] }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": true
+}

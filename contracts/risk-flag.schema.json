@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-helper.local/schemas/risk-flag.schema.json",
+  "title": "RiskFlag",
+  "type": "object",
+  "required": ["code", "level", "message"],
+  "properties": {
+    "code": { "type": "string" },
+    "level": { "type": "string", "enum": ["info", "warn", "block"] },
+    "message": { "type": "string" },
+    "evidence": { "type": "object" }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-helper.local/schemas/media.schema.json",
+  "title": "Media",
+  "type": "object",
+  "required": ["id", "storagePath", "mimeType", "byteSize", "sha256", "createdAt"],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "storagePath": { "type": "string", "description": "对象存储 key 或本地相对路径" },
+    "mimeType": { "type": "string" },
+    "byteSize": { "type": "integer", "minimum": 0 },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "createdAt": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

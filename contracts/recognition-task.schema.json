@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://financial-helper.local/schemas/recognition-task.schema.json",
+  "title": "RecognitionTask",
+  "type": "object",
+  "required": ["id", "status", "mediaId", "createdAt", "updatedAt"],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "processing", "completed", "failed"]
+    },
+    "mediaId": { "type": "string", "format": "uuid" },
+    "documentId": { "type": ["string", "null"], "format": "uuid" },
+    "documentKind": {
+      "type": ["string", "null"],
+      "enum": ["invoice", "bank", "other", null]
+    },
+    "errorMessage": { "type": ["string", "null"] },
+    "durationMs": { "type": ["integer", "null"], "minimum": 0 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}
